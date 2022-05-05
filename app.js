@@ -36,6 +36,10 @@ app.get('/', (request, response) => {
     response.render("index");
 });
 
+app.get('/generator', (request, response) => {
+    response.render("generator");
+});
+
 app.post('/scan', async (request, response) => {
     const reqBody = request.body;
     let amount = reqBody.amount;
@@ -52,7 +56,7 @@ app.post('/scan', async (request, response) => {
             })
         let result = await discountModel.saveDiscount(token);
         console.log("result:-", result)
-        let url = 'localhost:3000/claim-form/'
+        let url = 'https://qr-discount-generator.herokuapp.com/claim-form/'
         let finalUrl = url + token
         console.log("reqBody:-", finalUrl);
         // If the input is null return "Empty Data" error
@@ -109,7 +113,7 @@ app.post('/claimed', async (request, response) => {
             to: result.email, // list of receivers
             subject: "Coupon code for discount!", // Subject line
             html: "<b>Congratulations " + result.name + "! You have won the amount of Rs. " + amount + "</b>" +
-                "<h3><a href='http://localhost:3000'>Coupon</a></h3>" +
+                "<h3><a href='https://qr-discount-generator.herokuapp.com'>Coupon</a></h3>" +
                 " <b>Your coupon code is: " + coupon + ".</b>" +
                 "<b><br><br><br>Regards<br><h5>Coupon Company </h5></b>"
         }
