@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const db_url = "mongodb://localhost:27017/qr_code";
+const db_url = "mongodb+srv://thekrishnarajput:1234@practice.h6lsp.mongodb.net/qr_code?retryWrites=true&w=majority";
 
 mongoose.connect(db_url,
     {
