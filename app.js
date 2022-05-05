@@ -96,7 +96,7 @@ app.get('/claim-form/:amount', async (request, response) => {
     }
 });
 
-app.post('/claimed', async (request, response) => {
+app.post('/registered', async (request, response) => {
     let reqBody = request.body;
     // console.log("reqBody in claimed route:---", reqBody)
     try {
