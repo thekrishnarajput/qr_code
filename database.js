@@ -5,8 +5,8 @@ mongoose.connect(db_url,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false
+        // useCreateIndex: true,
+        // useFindAndModify: false
     })
     .then((result) => {
         console.log("DB connected")
