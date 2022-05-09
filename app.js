@@ -16,7 +16,7 @@ const port = process.env.PORT || 3000
 
 
 let mailTransporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'AOL',
     auth: {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD
