@@ -39,4 +39,22 @@ discountSchema.statics.getDiscount = async (reqBody) => {
     });
 }
 
+// To save discount details
+discountSchema.statics.deleteDiscountToken = async (reqBody) => {
+    return new Promise((resolve, reject) => {
+        let discountModel = mongoose.model('discounts', discountSchema);
+        console.log("reqBody in delete model:-",reqBody)
+        let discount = {amount: reqBody};
+        discountModel.deleteOne(discount,(error, result) => {
+            if (error) {
+                console.log("error in model:- ",error)
+                reject(error);
+            }
+            else {
+                resolve(result);
+            }
+        });
+    });
+}
+
 module.exports = mongoose.model('discounts', discountSchema);

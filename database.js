@@ -4,7 +4,9 @@ const db_url = "mongodb+srv://thekrishnarajput:1234@practice.h6lsp.mongodb.net/q
 mongoose.connect(db_url,
     {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
     })
     .then((result) => {
         console.log("DB connected")

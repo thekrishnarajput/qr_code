@@ -79,16 +79,22 @@ app.post('/scan', async (request, response) => {
 });
 
 app.get('/claim-form/:amount', async (request, response) => {
-    let amount = request.params.amount
+    let amount = request.params.amount;
+    console.log('request.params.amount:--', request.params.amount)
     try {
         let result = await discountModel.getDiscount(amount);
-        // console.log("result:---", result)
-        let discountToken = result.amount;
-        let decoded = jwt.verify(discountToken, process.env.TOKEN_KEY)
-        // let decodedAmount = decoded.amountToken.amount;
-        // console.log("decodedAmount: ",decodedAmount)
-        request.amountToken = decoded;
-        response.render("claim", { amount });
+        console.log("result:---", result)
+        if (result) {
+            let discountToken = result.amount;
+            let decoded = jwt.verify(discountToken, process.env.TOKEN_KEY)
+            // let decodedAmount = decoded.amountToken.amount;
+            // console.log("decodedAmount: ",decodedAmount)
+            request.amountToken = decoded;
+            response.render("claim", { amount });
+        }
+        else {
+            response.render("error");
+        }
     }
     catch (error) {
         console.log("Error in catch: ", error)
@@ -98,36 +104,44 @@ app.get('/claim-form/:amount', async (request, response) => {
 
 app.post('/registered', async (request, response) => {
     let reqBody = request.body;
-    // console.log("reqBody in claimed route:---", reqBody)
     try {
         let result = await userModel.userDetails(reqBody);
+        let discountResult = await discountModel.getDiscount(reqBody.token);
+        // console.log("discountResult:---", discountResult.amount)
+        if (discountResult) {
+            let discountToken = discountResult.amount;
+            let decoded = jwt.verify(discountToken, process.env.TOKEN_KEY)
+            let amount = decoded.amountToken.amount;
+            let removedToken = await discountModel.deleteDiscountToken(discountToken);
+            console.log("removedToken:-", removedToken);
+            let coupon = randomString.generate(15);
+            let data = { amount: amount, coupon: coupon }
 
-        let discountToken = reqBody.token;
-        let decoded = jwt.verify(discountToken, process.env.TOKEN_KEY)
-        let amount = decoded.amountToken.amount;
-        let coupon = randomString.generate(15);
-        let data = { amount: amount, coupon: coupon }
-
-        let mailDetails = {
-            from: '"Coupon" <process.env.EMAIL>', // sender address
-            to: result.email, // list of receivers
-            subject: "Coupon code for discount!", // Subject line
-            html: "<b>Congratulations " + result.name + "! You have won the amount of Rs. " + amount + "</b>" +
-                "<h3><a href='https://qr-discount-generator.herokuapp.com'>Coupon</a></h3>" +
-                " <b>Your coupon code is: " + coupon + ".</b>" +
-                "<b><br><br><br>Regards<br><h5>Coupon Company </h5></b>"
-        }
-        mailTransporter.sendMail(mailDetails, function (err, data) {
-            if (err) {
-                console.log('Error Occurs')
-                console.log(err)
-            } else {
-                console.log('Email sent successfully')
+            let mailDetails = {
+                from: '"Coupon" <process.env.EMAIL>', // sender address
+                to: result.email, // list of receivers
+                subject: "Coupon code for discount!", // Subject line
+                html: "<b>Congratulations " + result.name + "! You have won the amount of Rs. " + amount + "</b>" +
+                    "<h3><a href='https://qr-discount-generator.herokuapp.com'>Coupon</a></h3>" +
+                    " <b>Your coupon code is: " + coupon + ".</b>" +
+                    "<b><br><br><br>Regards<br><h5>Coupon Company </h5></b>"
             }
-        })
+            mailTransporter.sendMail(mailDetails, function (err, data) {
+                if (err) {
+                    console.log('Error Occurs')
+                    console.log(err)
+                } else {
+                    console.log('Email sent successfully')
+                }
+            })
 
-        let couponResult = await couponModel.saveCoupon(data);
-        response.render("success", { amount, coupon });
+            let couponResult = await couponModel.saveCoupon(data);
+            response.render("success", { amount, coupon });
+        }
+        else {
+            console.log("token not found in DB")
+            response.render("alreadyUsedQR");
+        }
     }
     catch (error) {
         console.log("Error in catch: ", error)
