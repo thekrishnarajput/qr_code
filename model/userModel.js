@@ -11,7 +11,6 @@ const userSchema = new mongoose.Schema({
     mobile: {
         type: Number,
         required: true,
-        unique: true,
         match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/
     },
     address: {
@@ -43,7 +42,6 @@ const userSchema = new mongoose.Schema({
     pan_card: {
         type: String,
         required: true,
-        unique: true,
         min: 10,
         max: 10
     },
