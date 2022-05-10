@@ -2,212 +2,281 @@
 <html lang="en">
 
 <head>
-  <title>Registration Form!</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Registration Form!</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Custom CSS -->
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+    <!-- Custom CSS -->
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
-    * {
-      font-family: Montserrat;
-    }
+        * {
+            font-family: Montserrat;
+        }
 
-    .card {
-      margin: 0 auto;
-      float: none;
-      margin-bottom: 30px;
-    }
-  </style>
+        .card {
+            margin: 0 auto;
+            float: none;
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 
-<body>
-
-  <div class="container">
-    <div class="header" style="text-align: center; margin-top: 25px;">
-      <h2>Please Fill This Form To Claim The Reward!</h2>
+<body onload="getItems()">
+    <div class="container">
+        <div class="header" style="text-align: center; margin-top: 25px">
+            <h2>Please Fill This Form To Claim The Reward!</h2>
+        </div>
+        <div class="card">
+            <article class="card-body">
+                <form action="/registered" id="register" method="POST" class="was-validated">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="name">पूरा नाम / Full Name:</label>
+                            <input type="text" class="form-control" id="name" placeholder="कृपया पूरा नाम डालें"
+                                name="name" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="mobile">मोबाइल नंबर / Mobile Number:</label>
+                            <input type="text" class="form-control" id="mobile"
+                                placeholder="कृपया मोबाइल नंबर दर्ज करें" name="mobile" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="email">ईमेल / Email:</label>
+                            <input type="email" class="form-control" id="email"
+                                placeholder="कृपया ईमेल दर्ज करें (वैकल्पिक)" name="email" />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="address1">पता 1 / Address 1:</label>
+                            <input type="text" class="form-control" id="address1" placeholder="कृपया पता 1 डाले"
+                                name="address1" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="address2">पता 2 / Address 2:</label>
+                            <input type="text" class="form-control" id="address2" placeholder="कृपया पता 2 डाले"
+                                name="address2" />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="city">शहर/गांव / City/Village:</label>
+                            <input type="text" class="form-control" id="city" placeholder=" कृपया शहर/गांव का नाम डालें"
+                                name="city" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="district">जिला / District:</label>
+                            <input type="text" class="form-control" id="district" placeholder="कृपया जिला का नाम डालें"
+                                name="district" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pincode">पिन कोड / Pincode:</label>
+                            <input type="text" class="form-control" id="pincode" placeholder="कृपया पिन कोड डालें"
+                                name="pincode" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="state">राज्य / State:</label>
+                            <select name="state" id="state" class="form-control" required>
+                                <option value="">राज्य चुनें / Select State</option>
+                                <option value="Andhra Pradesh">
+                                    आंध्र प्रदेश / Andhra Pradesh
+                                </option>
+                                <option value="Andaman and Nicobar Islands">
+                                    अंडमान व नोकोबार द्वीप समूह / Andaman and Nicobar Islands
+                                </option>
+                                <option value="Arunachal Pradesh">
+                                    अरुणाचल प्रदेश / Arunachal Pradesh
+                                </option>
+                                <option value="Assam">असम / Assam</option>
+                                <option value="Bihar">बिहार / Bihar</option>
+                                <option value="Chandigarh">चंडीगढ़ / Chandigarh</option>
+                                <option value="Chhattisgarh">छत्तीसगढ / Chhattisgarh</option>
+                                <option value="Dadar and Nagar Haveli">
+                                    दादर और नगर हवेली / Dadar and Nagar Haveli
+                                </option>
+                                <option value="Daman and Diu">
+                                    दमन और दीव / Daman and Diu
+                                </option>
+                                <option value="Delhi">दिल्ली / Delhi</option>
+                                <option value="Lakshadweep">लक्षद्वीप / Lakshadweep</option>
+                                <option value="Puducherry">पुदुचेरी / Puducherry</option>
+                                <option value="Goa">गोवा / Goa</option>
+                                <option value="Gujarat">गुजरात / Gujarat</option>
+                                <option value="Haryana">हरियाणा / Haryana</option>
+                                <option value="Himachal Pradesh">
+                                    हिमाचल प्रदेश / Himachal Pradesh
+                                </option>
+                                <option value="Jammu and Kashmir">
+                                    जम्मू और कश्मीर / Jammu and Kashmir
+                                </option>
+                                <option value="Jharkhand">झारखंड / Jharkhand</option>
+                                <option value="Karnataka">कर्नाटक / Karnataka</option>
+                                <option value="Kerala">केरल / Kerala</option>
+                                <option value="Madhya Pradesh">
+                                    मध्य प्रदेश / Madhya Pradesh
+                                </option>
+                                <option value="Maharashtra">महाराष्ट्र / Maharashtra</option>
+                                <option value="Manipur">मणिपुर / Manipur</option>
+                                <option value="Meghalaya">मेघालय / Meghalaya</option>
+                                <option value="Mizoram">मिजोरम / Mizoram</option>
+                                <option value="Nagaland">नगालैंड / Nagaland</option>
+                                <option value="Odisha">उड़ीसा / Odisha</option>
+                                <option value="Punjab">पंजाब / Punjab</option>
+                                <option value="Rajasthan">राजस्थान / Rajasthan</option>
+                                <option value="Sikkim">सिक्किम / Sikkim</option>
+                                <option value="Tamil Nadu">तमिलनाडु / Tamil Nadu</option>
+                                <option value="Telangana">तेलंगाना / Telangana</option>
+                                <option value="Tripura">त्रिपुरा / Tripura</option>
+                                <option value="Uttar Pradesh">
+                                    उत्तर प्रदेश / Uttar Pradesh
+                                </option>
+                                <option value="Uttarakhand">उत्तराखंड / Uttarakhand</option>
+                                <option value="West Bengal">
+                                    पश्चिम बंगाल / West Bengal
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="pan_card">पैन कार्ड / Pan Card:</label>
+                            <input type="text" class="form-control" id="pan_card" placeholder="कृपया पैन कार्ड डालें"
+                                name="pan_card" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="firm_name">फर्म का नाम / Firm Name:</label>
+                            <input type="text" class="form-control" id="firm_name" placeholder="कृपया फर्म का नाम डालें"
+                                name="firm_name" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="ac_holder_name">खाता धारक का नाम / Account Holder Name:</label>
+                            <input type="text" class="form-control" id="ac_holder_name"
+                                placeholder="कृपया खाता धारक का नाम डालें" name="ac_holder_name" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="account_no">अकाउंट नंबर / Account Number:</label>
+                            <input type="text" class="form-control" id="account_no" placeholder="कृपया खाता नंबर डालें"
+                                name="account_no" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="ifsc_code">आईएफएससी कोड / IFSC Code:</label>
+                            <input type="text" class="form-control" id="ifsc_code"
+                                placeholder="कृपया आईएफएससी कोड डालें" name="ifsc_code" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="account_type">खाते का प्रकार / Account Type:</label>
+                            <select name="account_type" id="account_type" class="form-control" required>
+                                <option value="">
+                                    खाता प्रकार चुनें / Select Account Type
+                                </option>
+                                <option value="S">बचत / Saving</option>
+                                <option value="C">चालू / Current</option>
+                                <option value="O">अन्य / Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="bank_name">बैंक का नाम / Bank Name:</label>
+                            <input type="text" class="form-control" id="bank_name" placeholder="कृपया बैंक का नाम डालें"
+                                name="bank_name" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="branch_name">शाखा का नाम / Branch Name:</label>
+                            <input type="text" class="form-control" id="branch_name"
+                                placeholder="कृपया शाखा का नाम डालें" name="branch_name" required />
+                            <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                            <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="agreed" required />मैं सहमत हूँ
+                                / I am agreed
+                                <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
+                                <div class="invalid-feedback">
+                                    जारी रखने के लिए इस चेकबॉक्स को चेक करें <br>/ Check this
+                                    checkbox to continue.
+                                </div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="hidden" id="token" name="token" value="<%=amount%>" />
+                        </div>
+                        <button type="submit" onclick="saveData()"
+                            class="btn btn-primary btn-lg btn-block">Submit</button>
+                    </div>
+                </form>
+            </article>
+        </div>
     </div>
-    <div class="card">
-      <article class="card-body">
-        <form action="/registered" id="register" method="POST" class="was-validated">
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              <label for="name">पूरा नाम / Full Name:</label>
-              <input type="text" class="form-control" id="name" placeholder="कृपया पूरा नाम डालें" name="name"
-                required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="mobile">मोबाइल नंबर / Mobile Number:</label>
-              <input type="text" class="form-control" id="mobile" placeholder="कृपया मोबाइल नंबर दर्ज करें" name="mobile"
-                required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="email">ईमेल / Email:</label>
-              <input type="email" class="form-control" id="email" placeholder="कृपया ईमेल दर्ज करें (वैकल्पिक)"
-                name="email">
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="address1">पता 1 / Address 1:</label>
-              <input type="text" class="form-control" id="address1" placeholder="कृपया पता 1 डाले"
-                name="address1" required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="address2">पता 2 / Address 2:</label>
-              <input type="text" class="form-control" id="address2" placeholder="कृपया पता 2 डाले"
-                name="address2">
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="city">शहर/गांव / City/Village:</label>
-              <input type="text" class="form-control" id="city" placeholder=" कृपया शहर/गांव का नाम डालें" name="city" required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="district">जिला / District:</label>
-              <input type="text" class="form-control" id="district" placeholder="कृपया जिला का नाम डालें" name="district"
-                required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="pincode">पिन कोड / Pincode:</label>
-              <input type="text" class="form-control" id="pincode" placeholder="कृपया पिन कोड डालें" name="pincode"
-                required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="state">राज्य / State:</label>
-              <select name="state" id="state" class="form-control" required>
-                <option value="">राज्य चुनें / Select State</option>
-                <option value="Andhra Pradesh">आंध्र प्रदेश / Andhra Pradesh</option>
-                <option value="Andaman and Nicobar Islands">अंडमान व नोकोबार द्वीप समूह / Andaman and Nicobar Islands</option>
-                <option value="Arunachal Pradesh">अरुणाचल प्रदेश / Arunachal Pradesh</option>
-                <option value="Assam">असम / Assam</option>
-                <option value="Bihar">बिहार / Bihar</option>
-                <option value="Chandigarh">चंडीगढ़ / Chandigarh</option>
-                <option value="Chhattisgarh">छत्तीसगढ / Chhattisgarh</option>
-                <option value="Dadar and Nagar Haveli">दादर और नगर हवेली / Dadar and Nagar Haveli</option>
-                <option value="Daman and Diu">दमन और दीव / Daman and Diu</option>
-                <option value="Delhi">दिल्ली / Delhi</option>
-                <option value="Lakshadweep">लक्षद्वीप / Lakshadweep</option>
-                <option value="Puducherry">पुदुचेरी / Puducherry</option>
-                <option value="Goa">गोवा / Goa</option>
-                <option value="Gujarat">गुजरात / Gujarat</option>
-                <option value="Haryana">हरियाणा / Haryana</option>
-                <option value="Himachal Pradesh">हिमाचल प्रदेश / Himachal Pradesh</option>
-                <option value="Jammu and Kashmir">जम्मू और कश्मीर / Jammu and Kashmir</option>
-                <option value="Jharkhand">झारखंड / Jharkhand</option>
-                <option value="Karnataka">कर्नाटक / Karnataka</option>
-                <option value="Kerala">केरल / Kerala</option>
-                <option value="Madhya Pradesh">मध्य प्रदेश / Madhya Pradesh</option>
-                <option value="Maharashtra">महाराष्ट्र / Maharashtra</option>
-                <option value="Manipur">मणिपुर / Manipur</option>
-                <option value="Meghalaya">मेघालय / Meghalaya</option>
-                <option value="Mizoram">मिजोरम / Mizoram</option>
-                <option value="Nagaland">नगालैंड / Nagaland</option>
-                <option value="Odisha">उड़ीसा / Odisha</option>
-                <option value="Punjab">पंजाब / Punjab</option>
-                <option value="Rajasthan">राजस्थान / Rajasthan</option>
-                <option value="Sikkim">सिक्किम / Sikkim</option>
-                <option value="Tamil Nadu">तमिलनाडु / Tamil Nadu</option>
-                <option value="Telangana">तेलंगाना / Telangana</option>
-                <option value="Tripura">त्रिपुरा / Tripura</option>
-                <option value="Uttar Pradesh">उत्तर प्रदेश / Uttar Pradesh</option>
-                <option value="Uttarakhand">उत्तराखंड / Uttarakhand</option>
-                <option value="West Bengal">पश्चिम बंगाल / West Bengal</option>
-              </select>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="pan_card">पैन कार्ड / Pan Card:</label>
-              <input type="text" class="form-control" id="pan_card" placeholder="कृपया पैन कार्ड डालें" name="pan_card"
-                required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="firm_name">फर्म का नाम / Firm Name:</label>
-              <input type="text" class="form-control" id="firm_name" placeholder="कृपया फर्म का नाम डालें"
-                name="firm_name" required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="ac_holder_name">खाता धारक का नाम / Account Holder Name:</label>
-              <input type="text" class="form-control" id="ac_holder_name" placeholder="कृपया खाता धारक का नाम डालें"
-                name="ac_holder_name" required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="account_no">अकाउंट नंबर / Account Number:</label>
-              <input type="text" class="form-control" id="account_no" placeholder="कृपया खाता नंबर डालें"
-                name="account_no" required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="ifsc_code">आईएफएससी कोड / IFSC Code:</label>
-              <input type="text" class="form-control" id="ifsc_code" placeholder="कृपया आईएफएससी कोड डालें"
-                name="ifsc_code" required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="account_type">खाते का प्रकार / Account Type:</label>
-              <select name="account_type" id="account_type" class="form-control" required>
-                <option value="">खाता प्रकार चुनें / Select Account Type</option>
-                <option value="S">बचत / Saving</option>
-                <option value="C">चालू / Current</option>
-                <option value="O">अन्य / Other</option>
-              </select>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="bank_name">बैंक का नाम / Bank Name:</label>
-              <input type="text" class="form-control" id="bank_name" placeholder="कृपया बैंक का नाम डालें"
-                name="bank_name" required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="branch_name">शाखा का नाम / Branch Name:</label>
-              <input type="text" class="form-control" id="branch_name" placeholder="कृपया शाखा का नाम डालें"
-                name="branch_name" required>
-              <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-              <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
-            </div>
-            <div class="form-group form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" name="remember" required>मैं सहमत हूँ / I am agreed
-                <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
-                <div class="invalid-feedback">जारी रखने के लिए इस चेकबॉक्स को चेक करें / Check this checkbox to continue.</div>
-              </label>
-            </div>
-            <div>
-              <input type="hidden" id="token" name="token" value='<%=amount%>'>
-            </div>
-              <button type="submit" id="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-          </div>
-        </form>
-      </article>
-    </div>
-  </div>
-
 </body>
-<!-- <script src="main.js"></script> -->
+<script>
+    function saveData() {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let mobile = document.getElementById("mobile").value;
+        let address1 = document.getElementById("address1").value;
+        let address2 = document.getElementById("address2").value;
+        let city = document.getElementById("city").value;
+        let district = document.getElementById("district").value;
+        let pincode = document.getElementById("pincode").value;
+        let state = document.getElementById("state").value;
+        let pan_card = document.getElementById("pan_card").value;
+        let account_no = document.getElementById("account_no").value;
+        let ifsc_code = document.getElementById("ifsc_code").value;
+        let account_type = document.getElementById("account_type").value;
+        let bank_name = document.getElementById("bank_name").value;
+        let branch_name = document.getElementById("branch_name").value;
+        let ac_holder_name = document.getElementById("ac_holder_name").value;
+        let firm_name = document.getElementById("firm_name").value;
+        let object = { name, email, mobile, address1, address2, city, district, pincode, state, pan_card, account_no, ifsc_code, account_type, bank_name, branch_name, ac_holder_name, firm_name }
+        localStorage.setItem("Object", JSON.stringify(object));
+    }
+    function getItems() {
+        let object = localStorage.getItem("Object");
+        let objResult = JSON.parse(object);
+        document.getElementById("name").value = objResult.name;
+        document.getElementById("email").value = objResult.email;
+        document.getElementById("mobile").value = objResult.mobile;
+        document.getElementById("address1").value = objResult.address1;
+        document.getElementById("address2").value = objResult.address2;
+        document.getElementById("city").value = objResult.city;
+        document.getElementById("district").value = objResult.district;
+        document.getElementById("pincode").value = objResult.pincode;
+        document.getElementById("state").value = objResult.state;
+        document.getElementById("pan_card").value = objResult.pan_card;
+        document.getElementById("account_no").value = objResult.account_no;
+        document.getElementById("ifsc_code").value = objResult.ifsc_code;
+        document.getElementById("account_type").value = objResult.account_type;
+        document.getElementById("bank_name").value = objResult.bank_name;
+        document.getElementById("branch_name").value = objResult.branch_name;
+        document.getElementById("ac_holder_name").value = objResult.ac_holder_name;
+        document.getElementById("firm_name").value = objResult.firm_name;
+    }
+</script>
 </html>
