@@ -80,10 +80,8 @@ app.post('/scan', async (request, response) => {
 
 app.get('/claim-form/:amount', async (request, response) => {
     let amount = request.params.amount;
-    console.log('request.params.amount:--', request.params.amount)
     try {
         let result = await discountModel.getDiscount(amount);
-        console.log("result:---", result)
         if (result) {
             let discountToken = result.amount;
             let decoded = jwt.verify(discountToken, process.env.TOKEN_KEY)

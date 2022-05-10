@@ -44,8 +44,8 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="mobile">मोबाइल नंबर / Mobile Number:</label>
-                            <input type="text" class="form-control" id="mobile"
-                                placeholder="कृपया मोबाइल नंबर दर्ज करें" name="mobile" required />
+                            <input type="tel" class="form-control" id="mobile"
+                                placeholder="कृपया 10 अंको का मोबाइल नंबर दर्ज करें" pattern="[0-9]{10}" name="mobile" required />
                             <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
                             <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
                         </div>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="pincode">पिन कोड / Pincode:</label>
-                            <input type="text" class="form-control" id="pincode" placeholder="कृपया पिन कोड डालें"
+                            <input type="tel" class="form-control" pattern="[0-9]{6}" id="pincode" placeholder="कृपया पिन कोड डालें"
                                 name="pincode" required />
                             <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
                             <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
@@ -155,7 +155,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="pan_card">पैन कार्ड / Pan Card:</label>
-                            <input type="text" class="form-control" id="pan_card" placeholder="कृपया पैन कार्ड डालें"
+                            <input type="text" class="form-control" id="pan_card" pattern="[A-Za-z]{5}[a-zA-Z0-9]{4}[A-Za-z]{1}$" placeholder="कृपया पैन कार्ड डालें"
                                 name="pan_card" required />
                             <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
                             <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
@@ -176,14 +176,14 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="account_no">अकाउंट नंबर / Account Number:</label>
-                            <input type="text" class="form-control" id="account_no" placeholder="कृपया खाता नंबर डालें"
+                            <input type="text" class="form-control" id="account_no" pattern="[0-9]{0,16}$" placeholder="कृपया खाता नंबर डालें"
                                 name="account_no" required />
                             <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
                             <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="ifsc_code">आईएफएससी कोड / IFSC Code:</label>
-                            <input type="text" class="form-control" id="ifsc_code"
+                            <input type="text" class="form-control" pattern="[A-Za-z]{4}[a-zA-Z0-9]{7}$" id="ifsc_code"
                                 placeholder="कृपया आईएफएससी कोड डालें" name="ifsc_code" required />
                             <div class="valid-feedback">आप आगे बढ़ सकते हैं...</div>
                             <div class="invalid-feedback">कृपया इस फील्ड को भरें.</div>
@@ -279,4 +279,5 @@
         document.getElementById("firm_name").value = objResult.firm_name;
     }
 </script>
+
 </html>

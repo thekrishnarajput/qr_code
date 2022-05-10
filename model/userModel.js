@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     mobile: {
         type: Number,
         required: true,
-        match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/
+        match: /^([+]\d{2})?\d{10}$/
     },
     address: {
         address1: {
